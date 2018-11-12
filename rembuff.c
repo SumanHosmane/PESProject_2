@@ -5,6 +5,25 @@ int *base_addr[10], buff_count;
 
 int rembuff(int buff_num, char c)
 {
+	buff_num-= 1;
+	if(buff_num < 0 || buff_num > buff_count)
+	{
+		printf("Buffer number invalid.\n");
+		return 1;
+	}
+
+	if(buff_count == 0)
+	{
+		printf("No buffer to remove.\n");
+		return 1;
+	}
+
+	if((buff_num + 1) > buff_count)
+	{
+		printf("Buffer_%d does not exist to remove.\n", (buff_num+1));
+		return 1;
+	}
+
 	if(*base_addr[buff_num] == 1)
 	{
 		printf("This buffer has already been freed.\n");
