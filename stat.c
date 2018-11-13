@@ -3,7 +3,7 @@
 
 int buff_size[10], buff_count, buff_char_count[10], *base_addr[10];
 
-int stat(int a, char c)
+int stat()
 {
 
 	if(buff_count == 0)

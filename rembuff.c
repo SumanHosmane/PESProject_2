@@ -3,7 +3,7 @@
 
 int *base_addr[10], buff_count;
 
-int rembuff(int buff_num, char c)
+int rembuff(int buff_num)
 {
 	buff_num-= 1;
 	if(buff_num < 0 || buff_num > buff_count)
@@ -32,7 +32,7 @@ int rembuff(int buff_num, char c)
 
 	free(base_addr[buff_num]);
 	*base_addr[buff_num] = 1;
-	printf("Circular Buffer_%d is deleted.\n",buff_num);
+	printf("Circular Buffer_%d is deleted.\n",(buff_num +1));
 	buff_count--;
 	return 0;
 }

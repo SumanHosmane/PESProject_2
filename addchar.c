@@ -8,6 +8,7 @@ int *base_addr[10], *head[10], *tail[10], buff_char_count[10], buff_size[10], bu
 
 int addchar(int buff_num, char c)
 {
+	int buff_full_flag = 0;
 	buff_num-=1;
 	//printf("buffsize%d---- charcount%d",buff_size[buff_num], buff_char_count[buff_num]);
 	if(buff_count == 0)
@@ -18,21 +19,24 @@ int addchar(int buff_num, char c)
 
 	if((buff_num +1) > buff_count)
 	{
-		printf("Buffer_%d does not exist", (buff_num + 1));
+		printf("Buffer_%d does not exist,\n", (buff_num + 1));
 		return 1;
 	}
 
 	if(buff_char_count[buff_num] >=  buff_size[buff_num])		//number of characters in buffer is more than the buffer length
 	{
+		buff_full_flag = 1;
 		printf("Buffer_full. Values will be overwritten.\n");
+		buff_char_count[buff_num] = buff_size[buff_num];
 		printf("Value thrown out: %c\n",*tail[buff_num]);		
 		tail[buff_num] += 1;
 	}
 
 	head[buff_num] = head[buff_num] + 1 >= (base_addr[buff_num] + buff_size[buff_num]) ? base_addr[buff_num] : head[buff_num] + 1;		//verifying if pointer is within buffer length limit
         *head[buff_num] = c;	//adding new character into buffer
-	buff_char_count[buff_num]++;
+	buff_char_count[buff_num] = (buff_full_flag == 0) ? buff_char_count[buff_num] + 1 : buff_char_count[buff_num];
 
-	printf("Character '%c' has been added to buffer_%d", c, buff_num );
+
+	printf("Character '%c' has been added to buffer_%d.\n", c, (buff_num + 1) );
 	return 0;
 }
